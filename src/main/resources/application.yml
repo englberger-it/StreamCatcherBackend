@@ -1,0 +1,5 @@
+saab.dreamcatcher:
+    apikeys:
+        twitch:
+            clientId: invalid
+            clientSecret: invalid

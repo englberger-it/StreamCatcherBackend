@@ -11,7 +11,9 @@ import java.util.stream.Stream;
 public class TwitchConnector implements StreamProvider {
     @Override
     public Stream<StreamData> getStreamDataByName(String name) {
-        var data = List.of(new StreamData("1"),new StreamData("2"));
+        // write a code to get data from twitch
+
+        var data = List.of(new StreamData("1"), new StreamData("2"));
         return data.stream();
     }
 }
