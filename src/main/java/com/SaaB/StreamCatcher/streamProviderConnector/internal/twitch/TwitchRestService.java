@@ -1,18 +1,25 @@
 package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch;
 
+import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessToken;
+import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 @Service
 public class TwitchRestService {
 
     private static final String TWITCH_API_BASE_URL = "https://api.twitch.tv/helix";
+    private static final String TWITCH_OAUTH_BASE_URL = "https://id.twitch.tv/oauth2";
 
     @Value("${saab.streamcatcher.apikeys.twitch.clientId}")
     private String clientId;
     @Value("${saab.streamcatcher.apikeys.twitch.clientSecret}")
     private String clientSecret;
+
+    private AccessToken accessToken;
 
     public String getStreamerData(String streamerName) {
         String accessToken = getAccessToken();
@@ -20,23 +27,25 @@ public class TwitchRestService {
         // Make a request to the Twitch API to get stream data for the specified streamer
         String apiUrl = TWITCH_API_BASE_URL + "/streams?user_login=" + streamerName;
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(apiUrl, String.class);
 
         // Process the result as needed
-        return result;
+        return restTemplate.getForObject(apiUrl, String.class);
     }
 
     private String getAccessToken() {
-        // make post to https://id.twitch.tv/oauth2/token
-        // with body:
-        // client_id=YOUR_CLIENT_ID
-        // client_secret=YOUR_CLIENT_SECRET
-        // grant_type=client_credentials
-        // returns json with access_token and expires_in and token_type
-        // Make a request to Twitch to obtain an access token using your client ID and client secret
-        // Implement the logic to get the access token using OAuth 2.0
-
-        // For simplicity, you can use a hardcoded access token (not recommended for production)
-        return "YOUR_ACCESS_TOKEN";
+        if (accessToken == null || accessToken.isExpired()) {
+            var accessTokenResponse = Optional.ofNullable(new RestTemplate()
+                    .postForObject(
+                            TWITCH_OAUTH_BASE_URL
+                                    + "/token?client_id=" + clientId
+                                    + "&client_secret=" + clientSecret
+                                    + "&grant_type=client_credentials",
+                            null,
+                            AccessTokenResponse.class)).orElseThrow(() -> new IllegalStateException("Could not get access token"));
+            accessToken = AccessToken.fromAccessTokenResponse(accessTokenResponse);
+        }
+        return accessToken.token();
     }
+
+    // TODO implement EventSub when a broadcaster goes live https://dev.twitch.tv/docs/eventsub/
 }
