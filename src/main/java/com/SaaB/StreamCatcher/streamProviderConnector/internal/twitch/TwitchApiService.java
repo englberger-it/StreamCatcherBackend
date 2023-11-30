@@ -2,14 +2,18 @@ package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch;
 
 import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessToken;
 import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessTokenResponse;
+import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamData;
+import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
-public class TwitchRestService {
+public class TwitchApiService {
 
     private static final String TWITCH_API_BASE_URL = "https://api.twitch.tv/helix";
     private static final String TWITCH_OAUTH_BASE_URL = "https://id.twitch.tv/oauth2";
@@ -21,7 +25,7 @@ public class TwitchRestService {
 
     private AccessToken accessToken;
 
-    public String getStreamerData(String streamerName) {
+    public Stream<TwitchStreamData> getStreamsByName(String streamerName) {
         String accessToken = getAccessToken();
 
         // Make a request to the Twitch API to get stream data for the specified streamer
@@ -29,7 +33,11 @@ public class TwitchRestService {
         RestTemplate restTemplate = new RestTemplate();
 
         // Process the result as needed
-        return restTemplate.getForObject(apiUrl, String.class);
+        return Arrays.stream(
+                Optional.ofNullable(restTemplate.getForObject(apiUrl, TwitchStreamResponse.class))
+                        .orElseThrow(() -> new IllegalStateException("no response from twitch"))
+                        .data()
+        );
     }
 
     private String getAccessToken() {

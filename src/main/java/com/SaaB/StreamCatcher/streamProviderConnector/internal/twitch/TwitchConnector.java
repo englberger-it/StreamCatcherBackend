@@ -1,19 +1,24 @@
 package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch;
 
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.StreamData;
+import com.SaaB.StreamCatcher.streamProviderConnector.StreamData;
 import com.SaaB.StreamCatcher.streamProviderConnector.internal.StreamProvider;
+import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamData;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 @Service
+@AllArgsConstructor
 public class TwitchConnector implements StreamProvider {
+
+    private final TwitchApiService twitchApiService;
+
     @Override
     public Stream<StreamData> getStreamDataByName(String name) {
-        // write a code to get data from twitch
-
-        var data = List.of(new StreamData("1"), new StreamData("2"));
-        return data.stream();
+        return twitchApiService.getStreamsByName(name)
+                .map(TwitchStreamData::toStreamData);
     }
+
+
 }

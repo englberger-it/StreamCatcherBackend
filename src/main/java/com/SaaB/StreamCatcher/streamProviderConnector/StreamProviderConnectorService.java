@@ -1,6 +1,5 @@
 package com.SaaB.StreamCatcher.streamProviderConnector;
 
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.StreamData;
 import com.SaaB.StreamCatcher.streamProviderConnector.internal.StreamProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
