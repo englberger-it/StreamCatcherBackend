@@ -1,6 +1,6 @@
-package com.SaaB.StreamCatcher.streamProviderConnector;
+package com.SaaB.StreamCatcher.streams;
 
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.StreamProvider;
+import com.SaaB.StreamCatcher.streams.internal.StreamProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
-public class StreamProviderConnectorService {
+public class StreamsService {
 
     private List<StreamProvider> streamProvider;
 

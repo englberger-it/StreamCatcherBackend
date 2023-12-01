@@ -1,8 +1,8 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch;
+package com.SaaB.StreamCatcher.streams.internal.twitch;
 
-import com.SaaB.StreamCatcher.streamProviderConnector.StreamData;
-import com.SaaB.StreamCatcher.streamProviderConnector.StreamProviderType;
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamData;
+import com.SaaB.StreamCatcher.streams.StreamData;
+import com.SaaB.StreamCatcher.streams.StreamProviderType;
+import com.SaaB.StreamCatcher.streams.internal.twitch.model.TwitchStreamData;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TwitchConnectorTest {
+class TwitchServiceTest {
 
     @MockBean
     private TwitchApiService twitchApiService;
@@ -22,7 +22,7 @@ class TwitchConnectorTest {
     void getStreamDataByName() {
         var mockData = getMockStreamData();
         Mockito.when(twitchApiService.getStreamsByName("test")).thenReturn(mockData);
-        var twitchConnector = new TwitchConnector(twitchApiService);
+        var twitchConnector = new TwitchService(twitchApiService);
         assertEquals(getMockStreamDataConverted(), twitchConnector.getStreamDataByName("test"));
     }
 

@@ -1,4 +1,4 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model;
+package com.SaaB.StreamCatcher.streams.internal.twitch.model;
 
 /**
  * The request body for the access token request. See <a href="https://dev.twitch.tv/docs/authentication/getting-tokens-oauth#oauth-client-credentials-flow"/>

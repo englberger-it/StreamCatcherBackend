@@ -1,4 +1,4 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model;
+package com.SaaB.StreamCatcher.streams.internal.twitch.model;
 
 /**
  * Returned by the twitch apy. The object is empty if there are no more pages left to page through. see <a href="https://dev.twitch.tv/docs/api/guide#pagination"/>

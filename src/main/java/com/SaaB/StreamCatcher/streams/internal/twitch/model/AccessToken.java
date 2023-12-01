@@ -1,4 +1,4 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model;
+package com.SaaB.StreamCatcher.streams.internal.twitch.model;
 
 import java.time.LocalDateTime;
 

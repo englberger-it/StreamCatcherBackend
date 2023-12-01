@@ -1,4 +1,4 @@
-package com.SaaB.StreamCatcher.streamProviderConnector;
+package com.SaaB.StreamCatcher.streams;
 
 import java.time.LocalDateTime;
 

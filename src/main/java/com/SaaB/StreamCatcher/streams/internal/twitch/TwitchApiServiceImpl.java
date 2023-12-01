@@ -1,10 +1,11 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch;
+package com.SaaB.StreamCatcher.streams.internal.twitch;
 
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessToken;
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.AccessTokenResponse;
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamData;
-import com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model.TwitchStreamResponse;
+import com.SaaB.StreamCatcher.streams.internal.twitch.model.AccessToken;
+import com.SaaB.StreamCatcher.streams.internal.twitch.model.AccessTokenResponse;
+import com.SaaB.StreamCatcher.streams.internal.twitch.model.TwitchStreamData;
+import com.SaaB.StreamCatcher.streams.internal.twitch.model.TwitchStreamResponse;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +14,8 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
-public class TwitchApiService {
+@Profile("prod")
+public class TwitchApiServiceImpl implements TwitchApiService {
 
     private static final String TWITCH_API_BASE_URL = "https://api.twitch.tv/helix";
     private static final String TWITCH_OAUTH_BASE_URL = "https://id.twitch.tv/oauth2";

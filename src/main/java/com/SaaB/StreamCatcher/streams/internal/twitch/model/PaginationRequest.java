@@ -1,4 +1,4 @@
-package com.SaaB.StreamCatcher.streamProviderConnector.internal.twitch.model;
+package com.SaaB.StreamCatcher.streams.internal.twitch.model;
 
 /**
  * Values to add to the request as query parameters to page through the results. see <a href="https://dev.twitch.tv/docs/api/guide#pagination"/>
