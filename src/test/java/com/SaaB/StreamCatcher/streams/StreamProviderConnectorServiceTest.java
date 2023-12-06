@@ -1,12 +1,11 @@
 package com.SaaB.StreamCatcher.streams;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class StreamProviderConnectorServiceTest {
 
-    @Autowired
-    private StreamsService streamsService;
+//    @Autowired
+//    private StreamsService streamsService;
 
 //    @Test
 //    void getStreamDataByName() {

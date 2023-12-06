@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
  * @param userName     the display name of the user
  * @param gameName     the name of the game
  * @param title        the title of the stream
- * @param tags         the tags of the stream
  * @param startedAt    the time the stream started format 2021-03-10T15:04:21Z,
  * @param language     the language of the stream
  * @param thumbnailUrl the url of the thumbnail format "https://static-cdn.jtvnw.net/previews-ttv/live_user_auronplay-{width}x{height}.jpg",
@@ -23,7 +22,6 @@ public record StreamData(
         String userName,
         String gameName,
         String title,
-        String[] tags,
         LocalDateTime startedAt,
         String language,
         String thumbnailUrl,

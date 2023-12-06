@@ -48,7 +48,6 @@ public record TwitchStreamData(
                 user_name,
                 game_name,
                 title,
-                tags,
                 LocalDateTime.parse(started_at, DateTimeFormatter.ISO_DATE_TIME),
                 language,
                 thumbnail_url,
