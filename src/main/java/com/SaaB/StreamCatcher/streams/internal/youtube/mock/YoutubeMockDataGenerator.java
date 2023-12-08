@@ -1,13 +1,14 @@
 package com.SaaB.StreamCatcher.streams.internal.youtube.mock;
 
-import com.SaaB.StreamCatcher.streams.internal.youtube.model.YoutubePageInfo;
-import com.SaaB.StreamCatcher.streams.internal.youtube.model.YoutubeSearchResult;
-import com.SaaB.StreamCatcher.streams.internal.youtube.model.YoutubeStreamResponse;
+import com.SaaB.StreamCatcher.streams.internal.youtube.model.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
+
+import static com.SaaB.StreamCatcher.streams.internal.util.MockUtil.generateRandomString;
 
 @Slf4j
 public class YoutubeMockDataGenerator {
@@ -28,26 +29,34 @@ public class YoutubeMockDataGenerator {
 
     private static YoutubeSearchResult getStreamForName(String name) {
         return new YoutubeSearchResult(
-                generateRandomString(8),
-                generateRandomString(10),
-                generateRandomString(10),
+                new YoutubeResultId(
+                        generateRandomString(8),
+                        generateRandomString(8),
+                        generateRandomString(8),
+                        generateRandomString(8)
+                ),
+                new YoutubeSnippet(
+                        LocalDateTime.now()
+                                .minusDays(new Random().nextInt(100)),
+                        generateRandomString(8),
+                        generateRandomString(10),
+                        generateRandomString(10),
+                        Map.of(
+                                "default",
+                                new YoutubeThumbnail(
+                                        generateRandomString(10),
+                                        new Random().nextInt(100),
+                                        new Random().nextInt(100)
+                                )
+                        ),
+                        name,
+                        generateRandomString(10),
+                        generateRandomString(10)
+                ),
                 name,
-                generateRandomString(10),
-                generateRandomString(10),
-                generateRandomString(10),
-                generateRandomString(10),
-                new String[]{"tag0", "tag2"},
-                new Random().nextInt(),
-                "2020-03-10T15:04:21Z",
-                "language",
-                "https://static-cdn.jtvnw.net/previews-ttv/live_user_auronplay-{width}x{height}.jpg",
-                new Random().nextBoolean()
+                generateRandomString(10)
         );
     }
 
-    private static String generateRandomString(int length) {
-        byte[] array = new byte[length];
-        new Random().nextBytes(array);
-        return new String(array, StandardCharsets.UTF_8);
-    }
+
 }

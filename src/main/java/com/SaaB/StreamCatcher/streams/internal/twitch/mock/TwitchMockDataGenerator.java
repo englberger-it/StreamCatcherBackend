@@ -3,9 +3,10 @@ package com.SaaB.StreamCatcher.streams.internal.twitch.mock;
 import com.SaaB.StreamCatcher.streams.internal.twitch.model.TwitchStreamData;
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.stream.Stream;
+
+import static com.SaaB.StreamCatcher.streams.internal.util.MockUtil.generateRandomString;
 
 @Slf4j
 public class TwitchMockDataGenerator {
@@ -36,9 +37,5 @@ public class TwitchMockDataGenerator {
         );
     }
 
-    private static String generateRandomString(int length) {
-        byte[] array = new byte[length];
-        new Random().nextBytes(array);
-        return new String(array, StandardCharsets.UTF_8);
-    }
+
 }

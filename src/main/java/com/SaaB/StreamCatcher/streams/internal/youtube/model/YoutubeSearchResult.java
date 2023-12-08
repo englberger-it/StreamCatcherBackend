@@ -3,7 +3,9 @@ package com.SaaB.StreamCatcher.streams.internal.youtube.model;
 import com.SaaB.StreamCatcher.streams.StreamData;
 import com.SaaB.StreamCatcher.streams.StreamProviderType;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public record YoutubeSearchResult(
         YoutubeResultId id,
@@ -21,10 +23,13 @@ public record YoutubeSearchResult(
                 snippet.title(),
                 snippet.publishedAt(),
                 null,
-                Optional.ofNullable(snippet.thumbnails().get("default"))
+                Optional.ofNullable(snippet.thumbnails()).map(map -> map.get("default"))
                         .map(YoutubeThumbnail::url)
                         .orElseGet(() ->
-                                snippet.thumbnails().values().stream()
+                                Optional.ofNullable(snippet.thumbnails())
+                                        .map(Map::values)
+                                        .orElse(Set.of())
+                                        .stream()
                                         .findFirst()
                                         .map(YoutubeThumbnail::url)
                                         .orElse(null)),
