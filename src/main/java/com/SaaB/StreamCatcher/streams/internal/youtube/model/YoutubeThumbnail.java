@@ -1,4 +1,8 @@
 package com.SaaB.StreamCatcher.streams.internal.youtube.model;
 
-public record YoutubeThumbnail(String url, Integer width, Integer height) {
+public record YoutubeThumbnail(
+        String url,
+        Integer width,
+        Integer height
+) {
 }

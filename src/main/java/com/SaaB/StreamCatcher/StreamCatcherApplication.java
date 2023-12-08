@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StreamCatcherApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StreamCatcherApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StreamCatcherApplication.class, args);
+    }
 
 }

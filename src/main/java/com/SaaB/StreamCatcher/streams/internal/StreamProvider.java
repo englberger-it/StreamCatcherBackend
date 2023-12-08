@@ -5,5 +5,5 @@ import com.SaaB.StreamCatcher.streams.StreamData;
 import java.util.stream.Stream;
 
 public interface StreamProvider {
-   Stream<StreamData> getStreamDataByName(String name);
+    Stream<StreamData> getStreamDataByName(String name);
 }

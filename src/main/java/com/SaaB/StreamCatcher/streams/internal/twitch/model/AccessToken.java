@@ -8,12 +8,17 @@ import java.time.LocalDateTime;
  * @param token     the token to use for authentication
  * @param expiresAt the time at which the token expires
  */
-public record AccessToken(String token, LocalDateTime expiresAt) {
+public record AccessToken(
+        String token,
+        LocalDateTime expiresAt
+) {
 
     public static AccessToken fromAccessTokenResponse(AccessTokenResponse accessTokenResponse) {
         return new AccessToken(
                 accessTokenResponse.accessToken(),
-                LocalDateTime.now().plusSeconds(accessTokenResponse.expiresIn())
+                LocalDateTime
+                        .now()
+                        .plusSeconds(accessTokenResponse.expiresIn())
         );
     }
 

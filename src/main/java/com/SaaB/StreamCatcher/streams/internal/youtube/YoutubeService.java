@@ -17,7 +17,10 @@ public class YoutubeService implements StreamProvider {
 
     @Override
     public Stream<StreamData> getStreamDataByName(String name) {
-        return Arrays.stream(youtubeApiService.getStreamsByName(name).items())
+        return Arrays
+                .stream(youtubeApiService
+                                .getStreamsByName(name)
+                                .items())
                 .map(YoutubeSearchResult::toStreamData);
     }
 }

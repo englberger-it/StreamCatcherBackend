@@ -17,7 +17,10 @@ public class YoutubeMockDataGenerator {
         int numberOfStreams = new Random().nextInt(10);
         log.info("Generating {} mock streams for {}", numberOfStreams, name);
 
-        var items = Stream.generate(() -> getStreamForName(name)).limit(numberOfStreams).toArray(YoutubeSearchResult[]::new);
+        var items = Stream
+                .generate(() -> getStreamForName(name))
+                .limit(numberOfStreams)
+                .toArray(YoutubeSearchResult[]::new);
         return new YoutubeStreamResponse(
                 "",
                 "",
@@ -36,7 +39,8 @@ public class YoutubeMockDataGenerator {
                         generateRandomString(8)
                 ),
                 new YoutubeSnippet(
-                        LocalDateTime.now()
+                        LocalDateTime
+                                .now()
                                 .minusDays(new Random().nextInt(100)),
                         generateRandomString(8),
                         generateRandomString(10),

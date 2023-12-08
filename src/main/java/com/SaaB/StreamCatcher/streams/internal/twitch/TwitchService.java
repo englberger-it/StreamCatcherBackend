@@ -16,7 +16,8 @@ public class TwitchService implements StreamProvider {
 
     @Override
     public Stream<StreamData> getStreamDataByName(String name) {
-        return twitchApiService.getStreamsByName(name)
+        return twitchApiService
+                .getStreamsByName(name)
                 .map(TwitchStreamData::toStreamData);
     }
 

@@ -28,30 +28,24 @@ public class TwitchApiServiceImpl implements TwitchApiService {
     private AccessToken accessToken;
 
     public Stream<TwitchStreamData> getStreamsByName(String streamerName) {
-        String accessToken = getAccessToken();
+//        String accessToken = getAccessToken();
 
         // Make a request to the Twitch API to get stream data for the specified streamer
         String apiUrl = TWITCH_API_BASE_URL + "/streams?user_login=" + streamerName;
         RestTemplate restTemplate = new RestTemplate();
 
         // Process the result as needed
-        return Arrays.stream(
-                Optional.ofNullable(restTemplate.getForObject(apiUrl, TwitchStreamResponse.class))
-                        .orElseThrow(() -> new IllegalStateException("no response from twitch"))
-                        .data()
-        );
+        return Arrays.stream(Optional.ofNullable(restTemplate.getForObject(apiUrl, TwitchStreamResponse.class))
+                                     .orElseThrow(() -> new IllegalStateException("no response from twitch"))
+                                     .data());
     }
 
     private String getAccessToken() {
         if (accessToken == null || accessToken.isExpired()) {
-            var accessTokenResponse = Optional.ofNullable(new RestTemplate()
-                    .postForObject(
-                            TWITCH_OAUTH_BASE_URL
-                                    + "/token?client_id=" + clientId
-                                    + "&client_secret=" + clientSecret
-                                    + "&grant_type=client_credentials",
-                            null,
-                            AccessTokenResponse.class)).orElseThrow(() -> new IllegalStateException("Could not get access token"));
+            var accessTokenResponse = Optional.ofNullable(new RestTemplate().postForObject(
+                            TWITCH_OAUTH_BASE_URL + "/token?client_id=" + clientId + "&client_secret=" + clientSecret + "&grant_type=client_credentials",
+                            null, AccessTokenResponse.class))
+                    .orElseThrow(() -> new IllegalStateException("Could not get access token"));
             accessToken = AccessToken.fromAccessTokenResponse(accessTokenResponse);
         }
         return accessToken.token();

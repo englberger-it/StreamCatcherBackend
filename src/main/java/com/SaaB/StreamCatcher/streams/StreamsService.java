@@ -14,7 +14,9 @@ public class StreamsService {
     private List<StreamProvider> streamProvider;
 
     public Stream<StreamData> getStreamDataByName(String name) {
-        return streamProvider.stream().flatMap(provider->provider.getStreamDataByName(name));
+        return streamProvider
+                .stream()
+                .flatMap(provider -> provider.getStreamDataByName(name));
     }
-    
+
 }

@@ -15,7 +15,9 @@ public class TwitchMockDataGenerator {
         int numberOfStreams = new Random().nextInt(10);
         log.info("Generating {} mock streams for {}", numberOfStreams, name);
 
-        return Stream.generate(() -> getStreamForName(name)).limit(numberOfStreams);
+        return Stream
+                .generate(() -> getStreamForName(name))
+                .limit(numberOfStreams);
     }
 
     private static TwitchStreamData getStreamForName(String name) {

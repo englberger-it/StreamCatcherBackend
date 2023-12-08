@@ -21,6 +21,8 @@ public class PublicRestService {
     @GetMapping("/streams/name/{name}")
     public List<StreamData> getStreamDataByName(@PathVariable String name) {
         log.info("getStreamDataByName: {}", name);
-        return streamsService.getStreamDataByName(name).collect(Collectors.toList());
+        return streamsService
+                .getStreamDataByName(name)
+                .collect(Collectors.toList());
     }
 }
